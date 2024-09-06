@@ -1,8 +1,8 @@
 import 'package:encrypt/encrypt.dart';
 
-class AESEncryptionHelper{
-
-  static get _key => Key.fromBase64('anVzdCBsZW5ndGgga2V5IGZsdXR0ZXJjb3JlMmJldGE=');
+class AESEncryptionHelper {
+  static get _key =>
+      Key.fromBase64('anVzdCBsZW5ndGgga2V5IGZsdXR0ZXJjb3JlMmJldGE=');
 
   static get _iv => IV.fromBase64('WVc1V2VtUkRRbk5hVnpWdQ==');
 

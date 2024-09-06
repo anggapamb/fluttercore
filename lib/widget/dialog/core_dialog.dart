@@ -7,9 +7,8 @@ class CoreDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final CoreDialogViewModel viewModel = Get.find();
-    
+
     return GestureDetector(
       onTap: () => viewModel.dismiss(),
       child: Container(
@@ -21,11 +20,12 @@ class CoreDialog extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
               child: Row(
                 children: [
-                  Obx(() => Visibility(visible: viewModel.coreDialogLoading.value == true, child: const CircularProgressIndicator())),
+                  Obx(() => Visibility(
+                      visible: viewModel.coreDialogLoading.value == true,
+                      child: const CircularProgressIndicator())),
                   Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Obx(() => Text('${viewModel.coreDialodMessage}'))
-                  )
+                      padding: const EdgeInsets.all(16),
+                      child: Obx(() => Text('${viewModel.coreDialodMessage}')))
                 ],
               ),
             ),

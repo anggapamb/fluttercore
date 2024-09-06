@@ -11,14 +11,11 @@ class AppModule {
     Get.lazyPut(() => Get.find<AppDatabase>().userDao);
     Get.lazyPut(() => CoreSession(), fenix: true);
     Get.lazyPut(() {
-      final dio = Dio(
-        BaseOptions(
+      final dio = Dio(BaseOptions(
           baseUrl: Env.baseUrl,
           sendTimeout: Env.networkTimeout,
           connectTimeout: Env.networkTimeout,
-          receiveTimeout: Env.networkTimeout
-        )
-      );
+          receiveTimeout: Env.networkTimeout));
       dio.interceptors.add(ApiTokenInterceptor());
       return dio;
     }, fenix: true);

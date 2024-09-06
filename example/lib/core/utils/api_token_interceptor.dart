@@ -10,7 +10,8 @@ class ApiTokenInterceptor extends QueuedInterceptorsWrapper {
   static const _authTokenKey = 'AUTH_TOKEN';
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     final savedToken = await _savedToken;
 
     final headers = _initialHeaders;
@@ -19,24 +20,22 @@ class ApiTokenInterceptor extends QueuedInterceptorsWrapper {
       headers['Authorization'] = 'Bearer $savedToken';
     } else {
       try {
-        final authResponse = await Dio(
-          BaseOptions(
+        final authResponse = await Dio(BaseOptions(
             baseUrl: Env.baseUrl,
-            headers: { 'Authorization': 'Basic $_initialToken' }
-          )
-        ).post('/auth');
+            headers: {'Authorization': 'Basic $_initialToken'})).post('/auth');
         final body = authResponse.data as Map<String, dynamic>;
         final auth = Auth.fromJson(body['data']);
         await _session.write(_authTokenKey, auth.accessToken);
         headers['Authorization'] = 'Bearer ${auth.accessToken}';
       } on DioException catch (e) {
         return handler.reject(e);
-      } 
+      }
     }
-    return handler.next(options.copyWith(headers: headers)); 
+    return handler.next(options.copyWith(headers: headers));
   }
 
-  Map<String, String> get _initialHeaders => { 'platform': GetPlatform.isAndroid ? 'android' : 'ios' };
+  Map<String, String> get _initialHeaders =>
+      {'platform': GetPlatform.isAndroid ? 'android' : 'ios'};
 
   Future<String?> get _savedToken async => await _session.read(_authTokenKey);
 

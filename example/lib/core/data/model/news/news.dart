@@ -16,9 +16,11 @@ class News {
   String? country;
   String? publishedAt;
 
-  News(this.author, this.title, this.description, this.url, this.source, this.image, this.category, this.language, this.country, this.publishedAt);
+  News(this.author, this.title, this.description, this.url, this.source,
+      this.image, this.category, this.language, this.country, this.publishedAt);
 
-  String get prettyPublishedAt => DateTimeHelper(locale: 'id_ID').convert(raw: publishedAt ?? '', destination: 'd MMMM yyyy, HH:mm');
+  String get prettyPublishedAt => DateTimeHelper(locale: 'id_ID')
+      .convert(raw: publishedAt ?? '', destination: 'd MMMM yyyy, HH:mm');
 
   factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
 

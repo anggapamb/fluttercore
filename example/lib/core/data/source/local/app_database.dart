@@ -11,7 +11,8 @@ abstract class AppDatabase extends FloorDatabase {
   UserDao get userDao;
 
   static Future<AppDatabase> init() async {
-    AppDatabase instance = await $FloorAppDatabase.databaseBuilder('sample_core.db').build();
+    AppDatabase instance =
+        await $FloorAppDatabase.databaseBuilder('sample_core.db').build();
     return instance;
   }
 }

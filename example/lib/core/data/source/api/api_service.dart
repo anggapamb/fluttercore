@@ -7,14 +7,11 @@ part 'api_service.g.dart';
 
 @RestApi()
 abstract class ApiService {
-
   factory ApiService(Dio dio) = _ApiService;
 
   @POST('/login')
   Future<ApiResponse<User>> login(
-    @Field('username') String username, 
-    @Field('password') String password 
-  );
+      @Field('username') String username, @Field('password') String password);
 
   @GET('/news')
   Future<ApiResponse<List<News>>> news();

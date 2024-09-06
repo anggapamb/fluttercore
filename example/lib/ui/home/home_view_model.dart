@@ -10,7 +10,6 @@ import 'package:example/core/data/source/local/dao/user_dao.dart';
 import 'package:example/ui/login/login_screen.dart';
 
 class HomeViewModel extends CoreViewModel {
-
   final ApiService _apiService = Get.find();
   final UserDao _userDao = Get.find();
   final CoreSession _session = Get.find();
@@ -33,15 +32,14 @@ class HomeViewModel extends CoreViewModel {
     newsLoading.value = true;
 
     ApiObserver.withCallback(
-      api: () => _apiService.news(), 
-      onSuccess: (response) {
-        newsLoading.value = false;
-        news.value = response.data!;
-      }, 
-      onError: (response) {
-        newsLoading.value = false;
-      }
-    );
+        api: () => _apiService.news(),
+        onSuccess: (response) {
+          newsLoading.value = false;
+          news.value = response.data!;
+        },
+        onError: (response) {
+          newsLoading.value = false;
+        });
   }
 
   @override

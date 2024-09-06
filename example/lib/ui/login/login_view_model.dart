@@ -8,7 +8,6 @@ import 'package:example/ui/home/home_screen.dart';
 import 'package:flutter_core/data/collectable.dart';
 
 class LoginViewModel extends CoreViewModel {
-  
   final ApiService _apiService = Get.find();
   final UserDao _userDao = Get.find();
 
@@ -41,7 +40,8 @@ class LoginViewModel extends CoreViewModel {
       onError: (response) => showDialog(message: response.message)
     ); */
 
-    final response = await ApiObserver.withFuture(api: () => _apiService.login(username, password));
+    final response = await ApiObserver.withFuture(
+        api: () => _apiService.login(username, password));
 
     if (response.isSuccessful) {
       _loginSuccess(response.data);
